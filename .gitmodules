@@ -46,3 +46,6 @@
 [submodule "home/.vim/bundle/YankRing.vim"]
 	path = home/.vim/bundle/YankRing.vim
 	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "home/.vim/bundle/rainbow-parenthesis"]
+	path = home/.vim/bundle/rainbow-parenthesis
+	url = git://github.com/hrp/rainbow-parenthesis.git

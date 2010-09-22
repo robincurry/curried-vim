@@ -108,6 +108,15 @@ nmap _= :call Preserve("normal gg=G")<CR>
 
 autocmd BufWritePre *.rb,*.rake,*.js,*.css :call Preserve("%s/\\s\\+$//e")
 
+
+" Rainbows!
+nmap <leader>R :RainbowParenthesesToggle<CR>
+
+
+" Shouldn't need shift
+nnoremap ; :
+
+
 " Switch to Normal mode and auto-save when focus leaves editor
 au FocusLost * <ESC>:wa
 
