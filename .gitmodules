@@ -43,3 +43,9 @@
 [submodule "home/.vim/bundle/vim-unimpaired"]
 	path = home/.vim/bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "home/.vim/bundle/Rainbow-Parenthesis"]
+	path = home/.vim/bundle/Rainbow-Parenthesis
+	url = git://github.com/vim-scripts/Rainbow-Parenthesis.git
+[submodule "home/.vim/bundle/YankRing.vim"]
+	path = home/.vim/bundle/YankRing.vim
+	url = git://github.com/vim-scripts/YankRing.vim.git

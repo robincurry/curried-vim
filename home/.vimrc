@@ -16,11 +16,31 @@ set wildmenu
 set wildmode=list:longest
 set scrolloff=3
 set visualbell
+set undofile
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
 let mapleader = ","
+
+" Options for better searching/moving:
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Long lines
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
 
 " NERDTree configuration
 let NERDTreeWinPos="right"
@@ -33,6 +53,18 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" Training wheels (disable arrow keys)
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
 " Remap tabs to Command+# (i.e. like Firefox/Chrome)
 nmap <D-1> 1gt
 nmap <D-2> 2gt
@@ -43,6 +75,19 @@ nmap <D-6> 6gt
 nmap <D-7> 7gt
 nmap <D-8> 8gt
 nmap <D-9> :tablast<CR>
+
+" Ack
+nnoremap <leader>a :Ack
+
+" Sort CSS properties
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+
+" Re-hardwrap paragraphs of text
+nnoremap <leader>q gqip
+
+" Re-select previously pasted text
+nnoremap <leader>v V`]
+
 
 " Useful function for calling commands and preserving search/cursor postiion
 function! Preserve(command)
@@ -62,6 +107,9 @@ nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 
 autocmd BufWritePre *.rb,*.rake,*.js,*.css :call Preserve("%s/\\s\\+$//e")
+
+" Switch to Normal mode and auto-save when focus leaves editor
+au FocusLost * <ESC>:wa
 
 set laststatus=2
 set statusline=%-3.3n\ %#keyword#%{fugitive#statusline()}\ %#todo#%f%*\ %y\ format:\ %{&ff};\ [%c,%l]\ %P
