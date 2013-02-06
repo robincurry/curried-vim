@@ -16,7 +16,11 @@ set wildmenu
 set wildmode=list:longest
 set scrolloff=3
 set visualbell
-set undofile
+set autoread
+set shortmess+=A
+set clipboard=unnamed
+set modeline
+"set undofile
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
@@ -40,7 +44,8 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+set colorcolumn=80
+:hi ColorColumn ctermbg=lightgrey guibg=#2D2D2D
 
 " NERDTree configuration
 let NERDTreeWinPos="right"
@@ -52,6 +57,10 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+cabbrev > :vertical resize +30<CR>
+cabbrev < :vertical resize -30<CR>
+
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " Training wheels (disable arrow keys)
 nnoremap <up> <nop>
@@ -79,6 +88,9 @@ nmap <D-9> :tablast<CR>
 " Ack
 nnoremap <leader>a :Ack
 
+" Git
+vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
 " Sort CSS properties
 nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
 
@@ -88,6 +100,20 @@ nnoremap <leader>q gqip
 " Re-select previously pasted text
 nnoremap <leader>v V`]
 
+" Enable matchit macros
+runtime macros/matchit.vim
+
+" Insert <Tab> or complete identifier
+" if the cursor is after a keyword character
+function MyTabOrComplete()
+    let col = col('.')-1
+    if !col || getline('.')[col-1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
+inoremap <Tab> <C-R>=MyTabOrComplete()<CR>
 
 " Useful function for calling commands and preserving search/cursor postiion
 function! Preserve(command)
@@ -108,17 +134,12 @@ nmap _= :call Preserve("normal gg=G")<CR>
 
 autocmd BufWritePre *.rb,*.rake,*.js,*.css :call Preserve("%s/\\s\\+$//e")
 
-
 " Rainbows!
 nmap <leader>R :RainbowParenthesesToggle<CR>
-
 
 " Shouldn't need shift
 nnoremap ; :
 
-
-" Switch to Normal mode and auto-save when focus leaves editor
-au FocusLost * <ESC>:wa
 
 set laststatus=2
 set statusline=%-3.3n\ %#keyword#%{fugitive#statusline()}\ %#todo#%f%*\ %y\ format:\ %{&ff};\ [%c,%l]\ %P
