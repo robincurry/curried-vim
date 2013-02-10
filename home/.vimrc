@@ -86,7 +86,7 @@ nmap <D-8> 8gt
 nmap <D-9> :tablast<CR>
 
 " Ack
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack!
 
 " Git
 vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
