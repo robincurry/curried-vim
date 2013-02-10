@@ -52,3 +52,6 @@
 [submodule "home/.vim/bundle/tabular"]
 	path = home/.vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
+[submodule "home/.vim/bundle/table-align"]
+	path = home/.vim/bundle/table-align
+	url = git://gist.github.com/287147.git
